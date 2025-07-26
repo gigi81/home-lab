@@ -13,7 +13,27 @@ services:
     restart: unless-stopped
     networks:
       - web-proxy
-    
+
+  wireguard-client:
+    image: ghcr.io/linuxserver/wireguard
+    container_name: wireguard-client
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./etc/wireguard:/config:ro
+      - /lib/modules:/lib/modules
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv4.ip_forward=1
+    restart: unless-stopped
+    networks:
+      - web-proxy
+
 networks:
   web-proxy:
     external: true

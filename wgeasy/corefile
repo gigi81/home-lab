@@ -1,0 +1,11 @@
+.:53 {
+    hosts {
+        10.0.1.100 photos.luigigrilli.com
+
+        fallthrough
+    }
+
+    forward . 1.1.1.1 8.8.8.8
+    log
+    errors
+}

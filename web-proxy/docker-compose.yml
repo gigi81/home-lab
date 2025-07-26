@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: proxy
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx:/etc/nginx:ro
+      - /etc/certificates:/etc/certificates:ro
+    restart: unless-stopped
+    networks:
+      - web-proxy
+    
+networks:
+  web-proxy:
+    external: true

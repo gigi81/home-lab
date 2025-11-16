@@ -46,8 +46,8 @@ services:
     image: coredns/coredns:latest
     container_name: dns
     volumes:
-      - ./corefile:./corefile
-    command: -conf ./corefile
+      - ./corefile:/Corefile
+    command: -conf /Corefile
     networks:
       wg:
         ipv4_address: 10.42.42.102
